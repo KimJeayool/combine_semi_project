@@ -570,4 +570,68 @@ public class OrderDAO {
 		}
 	}	
 	
+	
+	/* GET Price of Menu By oIdx*/
+	public int getOrderPrice(int oIdx){
+		try {
+			conn = com.db.SemiDB.getConn();
+			String sql = "SELECT s.count*m.price "
+						+ "FROM semi_order s, menu m "
+						+ "WHERE s.mIdx=m.midx AND s.oidx=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, oIdx);
+			rs = ps.executeQuery();
+			
+			int price = 0;
+			if(rs.next()) {
+				price = rs.getInt(1);
+			}
+			return price;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		} finally {
+			try {	
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public int getGIdx(int oIdx){
+		try {
+			conn = com.db.SemiDB.getConn();
+			String sql = "SELECT s.gIdx "
+						+ "FROM semi_order s, menu m "
+						+ "WHERE s.mIdx=m.midx AND s.oidx=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, oIdx);
+			rs = ps.executeQuery();
+			
+			int price = 0;
+			if(rs.next()) {
+				price = rs.getInt(1);
+			}
+			return price;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		} finally {
+			try {	
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+	}
+	
 }

@@ -32,7 +32,7 @@ public class SalesDAO {
 					+ "("
 					+ "SELECT ROWNUM AS rnum, A.* "
 					+ "FROM ("
-					+ "SELECT A.payidx, B.tnum, B.total, A.paydate, C.name FROM PAYLIST A, GUEST B , ADMIN C "
+					+ "SELECT A.payidx, B.tnum, B.total, A.paydate, C.name, B.gidx FROM PAYLIST A, GUEST B , ADMIN C "
 					+ "WHERE A.gidx = B.gidx AND b.pay='결제' "
 					+ "AND A.aIdx = C.aIdx "
 					+ "AND TO_CHAR(A.paydate, 'YYYY-MM-DD') >= ? "
@@ -52,9 +52,10 @@ public class SalesDAO {
 				int payIdx=rs.getInt("payidx"); 
 				int tNum=rs.getInt("tnum");
 				int total=rs.getInt("total");
-				java.sql.Date payDate=rs.getDate("paydate");
+				java.sql.Timestamp payDate=rs.getTimestamp("paydate");
 				String name=rs.getString("name");
-				SalesDTO dto=new SalesDTO(payIdx, tNum, total, payDate, name);
+				int gIdx=rs.getInt("gIdx"); 
+				SalesDTO dto=new SalesDTO(payIdx, tNum, total, payDate, name, gIdx);
 				arr.add(dto);				
 			}
 			return arr;
@@ -143,6 +144,44 @@ public class SalesDAO {
 				if(conn!=null)conn.close();
 			} catch (Exception e2) {}
 		}	
+	}
+	
+	//Get PAYLIST 
+	public ArrayList<SalesDTO> arr(int gIdx){
+		try {
+			conn=com.db.SemiDB.getConn();
+
+			String sql="select A.mname, A.price, B.count, C.paydate, D.name from menu A, semi_order B, paylist C, admin D "
+					+ "where A.midx = B.midx and B.gidx = c.gidx and c.aidx = d.aidx and B.gidx = ?";
+			
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, gIdx);
+			rs=ps.executeQuery();
+			
+			ArrayList<SalesDTO> arr=new ArrayList<SalesDTO>();
+			while(rs.next()) {
+				String mName=rs.getString("mname"); 
+				int price=rs.getInt("price");
+				int count=rs.getInt("count");
+				java.sql.Timestamp payDate=rs.getTimestamp("paydate");
+				String name=rs.getString("name");
+				SalesDTO dto=new SalesDTO(mName, price, count, payDate, name);
+				
+				arr.add(dto);				
+			}
+			return arr;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			} catch (Exception e2) {
+				
+			}
+		}
 	}
 	
 	

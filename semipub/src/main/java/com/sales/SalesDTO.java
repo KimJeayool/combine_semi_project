@@ -1,6 +1,7 @@
 package com.sales;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class SalesDTO {
 
@@ -8,8 +9,11 @@ public class SalesDTO {
 	private int tNum;
 	private int total;
 	private int gIdx;
-	private Date payDate;
+	private Timestamp payDate;
 	private String name;
+	private String mName;
+	private int price;
+	private int count;
 	
 	private String startdate;
 	private String enddate;
@@ -18,13 +22,47 @@ public class SalesDTO {
 		super();
 	}
 
-	public SalesDTO(int payIdx, int tNum, int total, Date payDate, String name) {
+	public SalesDTO(int payIdx, int tNum, int total, Timestamp payDate, String name, int gIdx) {
 		super();
 		this.payIdx = payIdx;
 		this.tNum = tNum;
 		this.total = total;
 		this.payDate = payDate;
 		this.name = name;
+		this.gIdx = gIdx;
+	}
+	
+	public SalesDTO(String mName, int price, int count, Timestamp payDate, String name) {
+		super();
+		this.mName = mName;
+		this.price = price;
+		this.count = count;
+		this.payDate = payDate;
+		this.name = name;
+	}
+
+	public String getmName() {
+		return mName;
+	}
+
+	public void setmName(String mName) {
+		this.mName = mName;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	public int getgIdx() {
@@ -59,11 +97,11 @@ public class SalesDTO {
 		this.total = total;
 	}
 
-	public Date getPayDate() {
+	public Timestamp getPayDate() {
 		return payDate;
 	}
 
-	public void setPayDate(Date payDate) {
+	public void setPayDate(Timestamp payDate) {
 		this.payDate = payDate;
 	}
 

@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%request.setCharacterEncoding("utf-8"); %>    
-<jsp:useBean id="odao" class="com.order.OrderDAO"></jsp:useBean>    
+<jsp:useBean id="odao" class="com.order.OrderDAO" scope="session"></jsp:useBean>    
 <%
 /**get Parameter*/
 	int gIdx = Integer.parseInt(request.getParameter("gIdx")); 
@@ -11,31 +11,6 @@
 	String s_price = request.getParameter("price");
 	String s_count = request.getParameter("count");
 	
-	
-	String s_size = request.getParameter("size");
-	int size = Integer.parseInt(s_size);
-	
-	int total = 0;
-	for(int i=0; i<size; i++){
-		int price = Integer.parseInt((request.getParameter("price"+i)));
-		int count = Integer.parseInt((request.getParameter("count"+i)));
-		total += price*count;
-	}
-	
-	System.out.println("total:" + total);//testcode
-	
-
-	//if(s_count==null||s_count.equals("")){
-	//	s_count="0";
-	//}
-	//int count = Integer.parseInt(s_count);
-	
-	//if(s_price==null||s_price.equals("")){
-	//	s_price="0";
-	//}
-	//int price = Integer.parseInt(s_price);
-	
-	//int total = price*count;
 
 	ArrayList<Integer> orders = new ArrayList<Integer>();
 	for(int i=0;i<s_orders.length;i++){
@@ -48,8 +23,14 @@
 		//Update stNum(3) of Semi_order table 
 		result = odao.orderCancel(orders);
 	
+		for(int i=0; i<s_orders.length; i++){
+			int oIdx = Integer.parseInt(s_orders[i]);
+			int price = odao.getOrderPrice(oIdx);
+			int gIdx2 = odao.getGIdx(oIdx);
+			odao.totalMinus(price, gIdx2);
+		}
+	
 		//Update Total(-) of Guest table
-		odao.totalMinus(total, gIdx);
 		
 		
 		%>
