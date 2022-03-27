@@ -48,6 +48,21 @@ public class OrderDTO {
 		this.orderDate = orderDate;
 		this.stName = stName;
 	}
+	
+	
+	public OrderDTO(int oIdx, int tNum, String mName, int count, Timestamp orderDate, String stName, int gIdx,
+			int price) {
+		super();
+		this.oIdx = oIdx;
+		this.tNum = tNum;
+		this.mName = mName;
+		this.count = count;
+		this.orderDate = orderDate;
+		this.stName = stName;
+		this.gIdx = gIdx;
+		this.price = price;
+	}
+
 	public OrderDTO(int oIdx, String mName, int count, Timestamp orderDate, String stName, int price) {
 		super();
 		this.oIdx = oIdx;
@@ -57,6 +72,10 @@ public class OrderDTO {
 		this.stName = stName;
 		this.price = price;
 	}
+	
+
+	
+	
 	public OrderDTO(int oIdx, int gIdx, int tNum, String mName, int price, int count, Timestamp orderDate,
 			String stName) {
 		super();
@@ -87,6 +106,7 @@ public class OrderDTO {
 		
 		
 	}
+
 
 	public int getoIdx() {
 		return oIdx;
@@ -175,7 +195,7 @@ public class OrderDTO {
 	public void setOutDate(Timestamp outDate) {
 		this.outDate = outDate;
 	}
-	
+
 	
 	
 }

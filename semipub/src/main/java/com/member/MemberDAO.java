@@ -51,6 +51,7 @@ public class MemberDAO {
 			String sql="select * from ADMIN order by aIdx desc";
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
+			
 			ArrayList<MemberDTO> arr=new ArrayList<MemberDTO>();
 			while(rs.next()) {
 	            int aIdx=rs.getInt("aIdx");
@@ -68,9 +69,9 @@ public class MemberDAO {
 	         return null;
 		} finally {
 			try {
-				if(rs!=null)rs.close();
-	            if(ps!=null)ps.close();
-	            if(conn!=null)ps.close();
+				if(rs!=null) rs.close();
+	            if(ps!=null) ps.close();
+	            if(conn!=null) ps.close();
 			} catch (Exception e2) {}
 		}
 	}
@@ -112,6 +113,7 @@ public class MemberDAO {
 			ps.setInt(5, dto.getaIdx());
 			int count=ps.executeUpdate();
 			return count;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;

@@ -3,24 +3,29 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.menu.*" %>
 
-<jsp:useBean id="medao" class="com.menu.MenuDAO" scope="session"></jsp:useBean>     
+<!-- Access Check -->
+<%@ include file="/login/adminAccessModule.jsp" %>
+<!-- Access for manager -->
+<%@include file="/onlyManager.jsp"%>
+
+<jsp:useBean id="mdao" class="com.menu.MenuDAO" scope="session"></jsp:useBean>     
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>관리자 페이지</title>
+  <title>메뉴 관리 페이지</title>
   <link rel="stylesheet" type="text/css" href="/semipub/css/mainLayout.css">
   <style>
-		#menu_tag3{
-			background-color: red;
-			color: white;
-		}
-		#menu_tag3:hover {
-			background-color: skyblue;
-			color: black;
-		}
+	#menu_tag3{
+		background-color: red;
+		color: white;
+	}
+	#menu_tag3:hover {
+		background-color: skyblue;
+		color: black;
+	}
 	#currentCate{
 		background-color: antiquewhite;
    		border-radius: 40px;
@@ -100,7 +105,7 @@ int cateNum = Integer.parseInt(s_cateNum); // Menu Category Number
 %>
 <!----------------------------- Page Number ----------------------------- -->
 <%
-int totalCnt = medao.getTotalMenuCount(cateNum); // Total Menu Count
+int totalCnt = mdao.getTotalMenuCount(cateNum); // Total Menu Count
 int listSize = 8;
 int pageSize = 10;
 
@@ -143,7 +148,7 @@ int nextIdx = (pageGroup+1)*pageSize + 1; //다음 페이지 index
       <div class="centerSide" align="center">
 	      <%
 	      	//Get Menu List By cateNum
-	      	ArrayList<MenuDTO> arr=medao.menuList(cateNum, cp, listSize);
+	      	ArrayList<MenuDTO> arr=mdao.menuList(cateNum, cp, listSize);
 	      	if(arr==null||arr.size()==0){
 	      		%>
       			<div class="notFoundList">

@@ -162,7 +162,7 @@ public class MenuDAO {
 	}
 	
 	
-	/**count all Menu registered*/
+	/**Count All Menu registered*/
 	public int countAllMenu() {
 		try {
 			conn = com.db.SemiDB.getConn();
@@ -219,16 +219,19 @@ public class MenuDAO {
 	public MenuDTO getMenuInfo(int mIdx){
 		try {
 			conn = com.db.SemiDB.getConn();
-			String sql = "SELECT * FROM menu WHERE mIdx = ?";
+			String sql = "SELECT * FROM menu WHERE mIdx = ? ORDER BY midx ASC";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, mIdx);
 			rs = ps.executeQuery();
-			rs.next();
-			String mname = rs.getString("mname");
-			int price = rs.getInt("price");
-			String img = rs.getString("img");
 			
-			MenuDTO dto = new MenuDTO(mIdx, mname, price, img);
+			MenuDTO dto = null;
+			if(rs.next()) {
+				String mname = rs.getString("mname");
+				int price = rs.getInt("price");
+				String img = rs.getString("img");
+				
+				dto = new MenuDTO(mIdx, mname, price, img);
+			}
 			
 			return dto;
 		} catch (Exception e) {

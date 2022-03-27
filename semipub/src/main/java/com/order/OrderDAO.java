@@ -58,7 +58,7 @@ public class OrderDAO {
 					+ "(SELECT rownum as rnum, step1.* FROM "
 					+ "(SELECT a.oidx, a.gidx, b.tnum, c.mname, c.price, a.count, a.orderdate, d.stname "
 					+ "FROM semi_order a, guest b, menu c, orderstatus d "
-					+ "WHERE a.gidx=b.gidx AND a.midx=c.midx AND a.stnum=d.stnum "
+					+ "WHERE a.gidx=b.gidx AND a.midx=c.midx AND a.stnum=d.stnum AND a.stnum!=3 "
 					+ "ORDER BY oidx DESC) step1 ) step2 "
 					+ "WHERE gidx=? AND rnum>=? AND rnum<=?";
 			ps = conn.prepareStatement(sql);
@@ -124,7 +124,7 @@ public class OrderDAO {
 				int price = rs.getInt("price");
 				int count = rs.getInt("count");
 				java.sql.Timestamp orderDate = rs.getTimestamp("orderdate");
-				//String stName = rs.getString("stname");
+				//String stName = rs.getString("stname"); //형한테 필요하지 않은 컬럼은 굳이 가져 올 필요없음 쿼리에서 가져오지 않는 컬럼 가져오려해서 에러난거임
 				//java.sql.Timestamp outDate = rs.getTimestamp("outDate");
 				//int stNum = rs.getInt("stNum");
 				//int mIdx = rs.getInt("mIdx");
@@ -197,7 +197,7 @@ public class OrderDAO {
 			return 0;
 		}finally {
 			try {
-				//if(rs!=null)rs.close();
+				if(rs!=null)rs.close();
 				if(ps!=null)ps.close();
 				if(conn!=null)conn.close();
 			} catch (Exception e2) {}
@@ -283,7 +283,7 @@ public class OrderDAO {
 				Timestamp orderDate = rs.getTimestamp("orderDate");
 				String stName = rs.getString("stName");
 				int price = rs.getInt("price");
-				OrderDTO dto = new OrderDTO(oIdx, tNum, mName, count, orderDate, stName, price);
+				OrderDTO dto = new OrderDTO(oIdx, oIdx, tNum, mName, price, count, orderDate, stName, orderDate, tNum, oIdx);
 				arr.add(dto);
 			}
 			return arr;
@@ -292,7 +292,6 @@ public class OrderDAO {
 			return null;
 		}finally {
 			try {
-				if(rs!=null) rs.close();
 				if(ps!=null)ps.close();
 				if(conn!=null)conn.close();
 			} catch (Exception e2) {
@@ -315,15 +314,14 @@ public class OrderDAO {
 			rs = ps.executeQuery();
 			ArrayList<OrderDTO> arr = new ArrayList<OrderDTO>();
 			while(rs.next()) {
-				int oIdx = rs.getInt("oIdx");
-				String mName = rs.getString("mName");
-				int count = rs.getInt("count");
-				Timestamp orderDate = rs.getTimestamp("orderDate");
-				String stName = rs.getString("stName");
-				int price = rs.getInt("price");
-				System.out.println("orderDAO 132 : "+stName);
-				System.out.println("orderDAO 132 : "+price);
-				OrderDTO dto = new OrderDTO(oIdx, tNum, mName, count, orderDate, stName, price);
+				int oIdx = rs.getInt(1); //oidx
+				int count = rs.getInt(4);//count
+				Timestamp orderDate = rs.getTimestamp(5);//orderdate
+				String mName = rs.getString(8);//mname
+				int price = rs.getInt(9); //price
+				String stName = rs.getString(10); //stname
+				
+				OrderDTO dto = new OrderDTO(oIdx, oIdx, tNum, mName, price, count, orderDate, stName, orderDate, tNum, oIdx);
 				arr.add(dto);
 			}
 			return arr;
@@ -478,31 +476,7 @@ public class OrderDAO {
 			}
 		}
 	}
-	
-	/**Order from menuCart*/
-	public int sendOrder(int mIdx, int mCount) {
-		try {
-			conn = com.db.SemiDB.getConn();
-			//gIdx는 임의로 1설정
-			String sql = "INSERT INTO semi_order VALUES(order_idx.nextval, 1, ?, ?,  sysdate, 1)";
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, mIdx);
-			ps.setInt(2, mCount);
-			return ps.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return 1;
-		} finally {
-			try {
-				//if(rs!=null)rs.close();
-				if(ps!=null)ps.close();
-				if(conn!=null)conn.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-	}
+
 	/**Order From Cart*/
 	public int sendOrder(int gIdx, int mIdx, int mCount) {
 		try {
@@ -510,8 +484,8 @@ public class OrderDAO {
 			conn = com.db.SemiDB.getConn();
 			String sql = "INSERT INTO semi_order VALUES(order_idx.nextval,? ,? ,? , sysdate, 1)";
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1,mIdx);
-			ps.setInt(2,gIdx);
+			ps.setInt(1,gIdx);
+			ps.setInt(2,mIdx);
 			ps.setInt(3, mCount);
 			rs = ps.executeQuery();
 			if(rs.next()) {result++;}
@@ -521,8 +495,7 @@ public class OrderDAO {
 			e.printStackTrace();
 			return -1;
 		} finally {
-			try {
-				if(rs!=null)rs.close();
+			try {	
 				if(ps!=null)ps.close();
 				if(conn!=null)conn.close();
 			}catch (Exception e2) {
@@ -531,13 +504,58 @@ public class OrderDAO {
 		}
 	}	
 	
-	/**Set totalAmount at guest table*/
-	public void setTotal(int total) {
+	/**Update Guest Table total(+)*/
+	public void totalPlus(int total, int gIdx) {
 		try {
 			conn = com.db.SemiDB.getConn();
-			String sql = "UPDATE guest SET total=total+? WHERE gidx=1";
+			String sql = "UPDATE guest SET total=total+? WHERE gIdx=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1,total);
+			ps.setInt(2,gIdx);
+			ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {	
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}	
+	
+	/**Update Guest Table total(-)*/
+	public void totalMinus(int total, int gIdx) {
+		try {
+			conn = com.db.SemiDB.getConn();
+			String sql = "UPDATE guest SET total=total-? WHERE gIdx=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1,total);
+			ps.setInt(2,gIdx);
+			ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {	
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
+	/**Set totalAmount at guest table*/
+	public void setTotal(int gIdx,int total) {
+		try {
+			conn = com.db.SemiDB.getConn();
+			String sql = "UPDATE guest SET total=total+? WHERE gidx=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1,total);
+			ps.setInt(2, gIdx);
 			ps.executeUpdate();
 			
 		} catch (Exception e) {

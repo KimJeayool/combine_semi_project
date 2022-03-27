@@ -5,7 +5,12 @@
 <%
 int tNum=(int)(session.getAttribute("tNum"));
 gdao.userIndate(tNum);
+
+/**plus*/
+int gIdx = gdao.getGIdx(tNum);
+session.setAttribute("gIdx", gIdx);
+
 %>
 <script>
-	location.href ='/semipub/user/menuList.jsp';
+	location.href ='menuList.jsp';
 </script>

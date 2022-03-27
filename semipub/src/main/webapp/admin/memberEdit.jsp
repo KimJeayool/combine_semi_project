@@ -11,35 +11,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>직원 정보 수정</title>
-<link rel="stylesheet" type="text/css" href="/semipub/css/mainLayout.css">
-<style>
-h2{
-	font-size: 30px;
- 	text-align:center;
-}
-table{
-	width: 350px;
-	height: 250px;
-	margin: 0px auto;
-	font-size: 18px;
-}
-#menu_tag5{
-	background-color: red;
-	color: white; 
-}
-form{
-	margin-top: 20px;
-}
-#editbutton{
-	text-align: center;
-	width: 70px;
-    height: 35px;
-    background-color: gray;
-    color: white;
-}
-</style>
+	<meta charset="UTF-8">
+	<title>직원 정보 수정</title>
+	<link rel="stylesheet" type="text/css" href="/semipub/css/mainLayout.css">
+	<style>
+	h2{
+		font-size: 30px;
+	 	text-align:center;
+	}
+	table{
+		width: 350px;
+		height: 250px;
+		margin: 0px auto;
+		font-size: 18px;
+	}
+	#menu_tag5{
+		background-color: red;
+		color: white; 
+	}
+	form{
+		margin-top: 20px;
+	}
+	#editbutton{
+		text-align: center;
+		width: 70px;
+	    height: 35px;
+	    background-color: gray;
+	    color: white;
+	}
+	</style>
 </head>
 <%
 String aIdx=request.getParameter("idx");

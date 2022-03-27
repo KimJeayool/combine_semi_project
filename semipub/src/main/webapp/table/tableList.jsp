@@ -101,6 +101,7 @@
 		}
 		.pageNum a{
 			text-decoration: none;
+			color: blue;
 		}
 		#cp{
 			color: black;

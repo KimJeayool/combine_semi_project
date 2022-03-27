@@ -13,7 +13,7 @@ public class GuestDAO {
 		
 	}
 	
-	/**GET Not Pay guest*/
+	/**GET guest with 미결제*/
 	public ArrayList<GuestDTO> getGuest(int startIdx, int endIdx){
 		try {
 			conn = com.db.SemiDB.getConn();
@@ -54,7 +54,7 @@ public class GuestDAO {
 	}
 	
 	
-	/**Change Guest Sate to Payed*/
+	/**Change Guest Sate to 결제*/
 	public int changeGuestState(int gIdx) {
 		try {
 			conn = com.db.SemiDB.getConn();
@@ -80,7 +80,7 @@ public class GuestDAO {
 		
 	}
 
-	/**SET Guest*/
+	/**입장 시간 관련 메서드*/
 	public int userIndate(int tNum) {
 		try {
 			conn=com.db.SemiDB.getConn();
@@ -101,4 +101,30 @@ public class GuestDAO {
 		
 	}
 	
+	/**Get gIdx using tNum and pay(unpaid)*/
+	public int getGIdx(int tNum) {
+		try {
+			conn=com.db.SemiDB.getConn();
+			String sql="SELECT gIdx FROM guest WHERE tNum=? AND pay='미결제'";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, tNum);
+			rs = ps.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+				
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+	}
 }

@@ -177,6 +177,7 @@
 				if(tNum>0){//if tableNumber clicked
 					arr_p = odao.getOrderList(tNum);
 					for(int i=0; i<arr_p.size(); i++){
+						
 						%>
 							<tr id=<%=arr_p.get(i).getStName().equals("주문")?"orderWhite":"" %>>
 								<td><input type="checkbox" name="orders" value=<%=arr_p.get(i).getoIdx() %> > </td>
@@ -186,8 +187,10 @@
 								<td><%=arr_p.get(i).getCount() %></td>
 								<td><%=arr_p.get(i).getOrderDate() %></td>
 								<td style="color : <%=!arr_p.get(i).getStName().equals("완료")?!arr_p.get(i).getStName().equals("주문")?"":"blue":"green" %>" ><%=arr_p.get(i).getStName() %></td>
-								<input type="hidden" value=<%=arr_p.get(i).getPrice()%> name="price">
-								<input type="hidden" value=<%=arr_p.get(i).getCount() %> name="count">
+								<input type="hidden" value=<%=arr_p.get(i).getPrice()%> name="price<%=i%>">
+								<input type="hidden" value=<%=arr_p.get(i).getCount() %> name="count<%=i%>">
+								<input type="hidden" value=<%=arr_p.size() %> name="size">
+								<input type="hidden" value=<%=arr_p.get(i).getgIdx() %> name="gIdx">
 							</tr>
 						<%
 					}
@@ -202,7 +205,6 @@
 						
 					}else{
 						for(int i=0; i<arr_p.size(); i++){
-							
 					%>
 						<tr id=<%=arr_p.get(i).getStName().equals("주문")?"orderWhite":"" %> >
 							<td><input type="checkbox" name="orders" value=<%=arr_p.get(i).getoIdx() %> > </td>
@@ -212,8 +214,11 @@
 							<td><%=arr_p.get(i).getCount() %></td>
 							<td><%=arr_p.get(i).getOrderDate() %></td>
 							<td style="color : <%=!arr_p.get(i).getStName().equals("완료")?!arr_p.get(i).getStName().equals("주문")?"":"blue":"green" %>"><%=arr_p.get(i).getStName() %></td>
-							<input type="hidden" value=<%=arr_p.get(i).getPrice()%> name="price">
-							<input type="hidden" value=<%=arr_p.get(i).getCount() %> name="count">
+							<input type="hidden" value=<%=arr_p.get(i).getPrice()%> name="price<%=i%>">
+							<input type="hidden" value=<%=arr_p.get(i).getCount() %> name="count<%=i%>">
+							<input type="hidden" value=<%=arr_p.size() %> name="size">
+							<input type="hidden" value=<%=arr_p.get(i).getgIdx() %> name="gIdx">
+							
 						</tr>
 					<%	
 						}

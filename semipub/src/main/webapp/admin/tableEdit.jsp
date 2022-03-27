@@ -49,11 +49,7 @@ String tPwd=request.getParameter("tPwd");
 <body>
 <%@include file="/header.jsp"  %>
 <section>
-	<article>
-		<div class="topSide">
-			<%@include file="memberTopSide.jsp" %>		
-		</div>
-	</article>
+	<%@include file="memberTopSide.jsp" %>		
 	<article>
 		<div class="centerSide">
 		<h2><%=tNum %>번 테이블 수정</h2>
