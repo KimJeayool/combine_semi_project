@@ -80,10 +80,9 @@
    border-radius: 40px;
  }
  .centerSide{
-   background-image: url('/semipub/img/background.jpg');
-   background-repeat : no-repeat;
    width: 83vw;
    height: 80vh;
+   background-color: rgb(247,244,227);
  }
  .bottomSide{
    width: 83vw;
