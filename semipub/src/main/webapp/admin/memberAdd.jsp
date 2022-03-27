@@ -14,13 +14,14 @@
 <link rel="stylesheet" type="text/css" href="/semipub/css/mainLayout.css">
 <style>
 h2{
-	font-size: 30px;
+	font-size: 40px;
  	text-align:center;
+ 	padding-top: 30px;
 }
 table{
 	width: 350px;
 	height: 250px;
-	margin: 0px auto;
+	margin: 20px auto;
 	font-size: 18px;
 }
 #menu_tag5{
@@ -34,8 +35,8 @@ form{
 	text-align: center;
 	width: 70px;
     height: 35px;
-    background-color: gray;
-    color: white;
+    background-color: white;
+	border-radius: 20px;
 }
 </style>
 </head>
@@ -68,7 +69,7 @@ function checkValue(obj){
 				</tr>
 				<tr>
 					<td>비밀번호 </td>
-					<td><input type="text" name="aPwd" onkeydown="checkValue(this)"></td>
+					<td><input type="password" name="aPwd" onkeydown="checkValue(this)"></td>
 				</tr>
 				<tr>
 					<td>이름 </td>

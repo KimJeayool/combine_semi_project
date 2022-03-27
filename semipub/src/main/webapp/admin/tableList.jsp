@@ -22,18 +22,23 @@
 		padding-top: 30px;
 	}
 	table{
-		width:550px;
-		margin:20px auto;
-		font-size: 18px;
+		width:650px;
+		margin:40px auto;
+		border-collapse: collapse;
 	}
 	table th{
-		background-color:gray;
+		background-color:black;
+		color: white;
+		font-size: 20px;
 	}
 	table td{
 		text-align: center;
+		font-size: 18px;
+		border-top: 1px solid black;
 	}
 	table a:link{
-		color: blue;
+		color: black;
+		text-decoration: underline;
 	}
 	table a:hover{
 		color: red;

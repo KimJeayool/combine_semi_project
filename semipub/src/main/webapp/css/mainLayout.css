@@ -9,7 +9,7 @@
  .topMenu{
    width: 17vw;
    height: 100vh;
-   background-color: black; 
+   background-color: #060D2A; 
    color: white;
    font-size: 30px;
  }
@@ -80,7 +80,8 @@
    border-radius: 40px;
  }
  .centerSide{
-   background-color: rgb(194, 181, 181);
+   background-image: url('/semipub/img/background.jpg');
+   background-repeat : no-repeat;
    width: 83vw;
    height: 80vh;
  }

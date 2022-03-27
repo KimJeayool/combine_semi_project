@@ -69,7 +69,8 @@
 			width: 120px;
 			font-size: 25px;
 			font-weight: bold;
-			background-color: skyblue;
+			background-color: white;
+			border-radius: 20px;
 		}
 		#button:hover{
 			background-color: red;

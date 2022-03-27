@@ -28,23 +28,42 @@
 			padding-top: 20px;
 		}
 		table{
-			width : 600px;
+			width : 850px;
 			text-align: center;
 			margin : 30px auto;
+			border-collapse: collapse;
+			border-bottom: 0px;
 		}
 		table th{
-			background-color: gray;
+			background-color: black;
+			font-size: 20px;
+			color: white;
+		}
+		table td{
+			border-top: 3px double black;
+			font-size: 18px;
 		}
 		.numBox{
 			width: 40px;
+			font-size: 15px;
+			text-align: center;
+			border-radius: 20px;
 		}
 		.formButton{
-			font-size: 20px;
-			background-color: skyblue;
+			font-size: 25px;
+			font-weight: bold;
+			width: 100px;
+			background-color: white;
+			color: black;
+			margin: 20px;
+			border-radius: 20px;
 		}		
 		.formButton:hover{
 			background-color: red;
 			color: white;
+		}
+		.click{
+			border-radius: 20px;
 		}
 	</style>
 </head>
@@ -56,7 +75,7 @@
      		<div class="centerSide">
      			<h2>장바구니 페이지</h2>
      			<form name="menuCart" action="menuCart_ok.jsp">
-     				<table border="1">
+     				<table>
      					<!-- Table Head -->
      					<thead>
 			      			<tr>
@@ -103,14 +122,14 @@
 									<td><%=dto.getPrice() %></td>
 								    <td>
 								    	<input type="hidden" value=<%=dto.getmIdx() %> name="mIdx<%=i%>">
-      									<input type="number" value=<%=count %> name="count<%=i %>" id="mCount<%=i%>" class="numBox">
+      									<input type="number" value=<%=count %> class="numBox" name="count<%=i %>" id="mCount<%=i%>" class="numBox">
      								</td>
 									<td>
-      									<input type="button" value="변경" onclick="javascript:window.location.href='menuCart_ok.jsp?part=2&mIdx=<%=dto.getmIdx()%>&mCount='+document.getElementById('mCount<%=i%>').value">
+      									<input type="button" value="변경" class="click" onclick="javascript:window.location.href='menuCart_ok.jsp?part=2&mIdx=<%=dto.getmIdx()%>&mCount='+document.getElementById('mCount<%=i%>').value">
      								</td>
       								<td><%=dto.getPrice()*count %></td>
       								<td>
-      									<input type="button" value="삭제" onclick="javascript:window.location.href='menuCart_ok.jsp?part=3&mIdx=<%=dto.getmIdx()%>'">
+      									<input type="button" value="삭제" class="click" onclick="javascript:window.location.href='menuCart_ok.jsp?part=3&mIdx=<%=dto.getmIdx()%>'">
     								</td>
 								</tr>
 								<%

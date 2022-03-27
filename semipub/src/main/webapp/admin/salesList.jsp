@@ -25,7 +25,8 @@
 }
 
 h1 {
-	font-size: 200%;
+	font-size: 40px;
+	padding-top: 20px;
 }
 
 #tb {
@@ -42,9 +43,13 @@ h1 {
 }
 
 table {
-	width: 100%;
+	width: 100px;
 	text-align: center;
 	margin: 0px auto;
+}
+table th{
+	background-color: black;
+	color: white;
 }
 
 #RTB th, #RTB td {
@@ -65,7 +70,7 @@ table {
 }
 
 #th4 {
-	width: 18%;
+	width: 20%;
 }
 
 #th5 {
@@ -74,6 +79,14 @@ table {
 
 #th6 {
 	width: 10%;
+}
+.centerSide a:link{
+	color: black;
+	text-decoration: underline;
+}
+#amount{
+	font-size: 20px;
+	font-weight: bold;
 }
 </style>
 
@@ -193,7 +206,7 @@ if (cp % pageSize == 0)
 							<tr>
 								<td><%=sdto.getPayIdx()%></td>
 								<td><%=sdto.gettNum()%></td>
-								<td><%=sdto.getTotal()%></td>
+								<td><%=sdto.getTotal()%> 원</td>
 								<td><%=sdto.getPayDate().toString()%></td>
 								<td><%=sdto.getName()%></td>
 								<td><a href="payList.jsp?gIdx=<%=sdto.getgIdx()%>">결제내역</a></td>
@@ -204,8 +217,8 @@ if (cp % pageSize == 0)
 							%>
 						</table>
 						<br>
-						<div id="amoun" align="right">
-							총 매출액:<%=totalPrice%>원
+						<div id="amount" align="right">
+							총 매출액 : <%=totalPrice%> 원
 						</div>
 					</div>
 
@@ -220,15 +233,15 @@ if (cp % pageSize == 0)
 									<%
 									}
 									%> <%
- for (int i = (userGroup * pageSize + 1); i <= (userGroup * pageSize + pageSize); i++) {
- %>&nbsp;&nbsp;<a href="salesList.jsp?cp=<%=i%>"><%=i%></a>&nbsp;&nbsp;<%
- if (i == totalPage)
- 	break;
- }
- %> <%
- if (userGroup != (totalPage / pageSize - (totalPage % pageSize == 0 ? 1 : 0))) {
- %> <a href="salesList.jsp?cp=<%=(userGroup + 1) * pageSize + 1%>">&gt;&gt;</a>
-									<%
+									 for (int i = (userGroup * pageSize + 1); i <= (userGroup * pageSize + pageSize); i++) {
+									 %>&nbsp;&nbsp;<a href="salesList.jsp?cp=<%=i%>"><%=i%></a>&nbsp;&nbsp;<%
+									 if (i == totalPage)
+									 	break;
+									 }
+									 %> <%
+									 if (userGroup != (totalPage / pageSize - (totalPage % pageSize == 0 ? 1 : 0))) {
+									 %> <a href="salesList.jsp?cp=<%=(userGroup + 1) * pageSize + 1%>">&gt;&gt;</a>
+																		<%
 									}
 									%>
 								</td>

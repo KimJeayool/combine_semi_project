@@ -22,7 +22,7 @@
 		color: black;
 	}
 	h1{
-	font-size: 200%;
+	font-size: 40px;
 	}
 	/* Page Area*/
 	.tb{
@@ -47,12 +47,16 @@
 	}
 	.table th{
 	border-collapse: collapse;
+	font-size: 20px;
 	color: #168;
 	}
 	.table th {
 	  color: white;
 	  background-color:black;
 	  border-bottom-width: thick;
+	}
+	table td{
+		font-size: 18px;
 	}
 	.table th, .table td {
 	  border: 1px solid gray;
@@ -97,14 +101,35 @@
 	.buttonSide .button{
 		width: 130px;
 		height: 50px;
-		font-size: 20px;
+		font-size: 25px;
 		margin: 10px;
-		background-color: #057BD5;
-		color: white;
+		background-color: white;
 		font-weight: bolder;
+		border-radius: 20px;
 	}
 	.button:hover {
 		background-color: red;
+		color: white;
+	}
+	#amoun{
+		font-size: 25px;
+	}
+	.pageNum a{
+		text-decoration: none;
+		font-size:20px;
+		font-weight: bold;
+		margin: 0px auto;
+	}
+	#currentPage{
+		font-size:25px;
+		color: black;
+		margin: 20px;
+		text-align: center;
+		margin: 0px auto;
+	}
+	.dutch{
+		font-size: 20px;
+		margin: 15px;
 	}
 	</style>
 <%
@@ -156,7 +181,7 @@ function payRequest(){
 	      <div class="tb">
 	      
 	      <div id="title"><h1 align="center">주문내역</h1>
-	      <br><br>
+	      <br>
 	      <table id="RTB" class="table">
 	      	<thead>
 	      	<tr>
@@ -195,7 +220,7 @@ function payRequest(){
 			</tbody>
 	      </table>
 	      <form>
-	      <div align="Right">
+	      <div class="dutch" align="Right">
 	      <strong>더치페이</strong> <input type=button value="-" onClick="minusAmount();">
 	      <input type="text" name="amount" id="dptext" value="1">
 	      <input type=button value="+" onClick="plusAmount();"> :<span id="totalPrice"><%=totalPrice%></span>원
@@ -228,10 +253,10 @@ function payRequest(){
 	   	  </script>
 	      
 	    
-	      <div class="page">
+	      <div class="pageNum" align="center">
 					<%
 					if(dtos==null || dtos.size()==0){
-						%><div>1</div><%
+						%>1<%
 					}else{
 					
 						if(userGroup!=0){
@@ -242,7 +267,7 @@ function payRequest(){
 						%>
 						<%
 						for(int i=(userGroup*pageSize+1) ; i<=(userGroup*pageSize+pageSize) ; i++){
-							%>&nbsp;&nbsp;<a href="orderHistory.jsp?cp=<%=i%>"><%=i%></a>&nbsp;&nbsp;<%
+							%><a href="orderHistory.jsp?cp=<%=i%>" <%=cp==i? "id='currentPage'":"" %>><%=i%></a><%
 							if(i==totalPage)break;
 						}
 						%>

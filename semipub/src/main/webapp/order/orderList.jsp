@@ -16,8 +16,8 @@
 			}
 	</script>
 	<style>
-	h2{
-
+	h2{	
+		font-size: 40px;
 		text-align: center;
 	}
 	table{
@@ -26,21 +26,33 @@
   	 	text-align: center;
   	 	margin : auto;
   	 	font-size : 20px;
+  	 	border-collapse: collapse;
+	}
+	table th{
+		background-color: black;
+		color: white;
 	}
 	table td{
 		border-bottom: 3px solid gray;
 	}
+	table a:link{
+		color: black;
+		text-decoration: underline;
+	}
 	input[type=submit], input[type=button]{
-		width : 200px;
-		height : 60px;
-		font-size : 30px;
+		width : 120px;
+		height : 40px;
+		font-size : 20px;
+		font-weight: bold;
+		background-color: white;
+		border-radius: 20px;
 	}
 	input[type=checkbox] {
 		width : 25px;
 		height : 25px;
 	}
 	#orderWhite{
-		background-color: white;
+		background-color: yellow;
 	}
 	#colorBlue{
 		color: blue;
@@ -62,7 +74,7 @@
 <%
 /**about page*/
 	int totalCnt = odao.countAll();
-	int listSize = 4;
+	int listSize = 8;
 	int pageSize = 5;
 	String s_cp = request.getParameter("cp");
 	if(s_cp==null||s_cp.equals("")){
@@ -97,7 +109,7 @@
 				<thead>
 					<tr>
 						<td colspan="7" align="right">
-							잔여 주문:<%=odao.countOrders(1) %>개
+							잔여 주문 : <strong><%=odao.countOrders(1) %>개</strong>
 						</td>
 					</tr>
 					<tr>

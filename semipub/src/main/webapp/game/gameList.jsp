@@ -16,7 +16,7 @@
 			color: black;
 		}
 		h2{
-      		font-size: 30px;
+      		font-size: 50px;
       		padding: 30px 0px 60px 0px;
       		text-align: center;
     	}

@@ -33,9 +33,9 @@
 			height: 30px;
 			font-size: 20px;
 			margin: 10px;
-			background-color: #057BD5;
-			color: white;
+			background-color: white;
 			font-weight: bolder;
+			border-radius: 20px;
 		}
 		.square{
 			width: 15px;

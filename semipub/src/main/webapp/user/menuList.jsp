@@ -46,20 +46,24 @@
 		padding-top: 200px;
 	}
 	.tableArea{
-		height: 510px;
+		height: 550px;
 		padding-top: 10px;
 	}
 	table{
 		margin: 0px auto;
 		border-spacing: 20px;
+		width: 750px;
 	}
 	table td{
-		background-color: white;
+		background-color: black;
 		border-radius:10%;
 		text-align: center;
+		width: 160px;
+		color: white;
 	}
 	table img {
-		width: 130px;
+		width: 220px;
+		height: 150px;
 		border-top-left-radius: 20px;
 		border-top-right-radius: 20px;
 	}
@@ -90,6 +94,8 @@
 	}
 	.pageNum a{
 		text-decoration: none;
+		font-size:20px;
+		font-weight: bold;
 	}
 	#currentPage{
 		font-size:25px;
@@ -98,6 +104,17 @@
 	}
 	#mCount1{
 		text-align: center;
+	}
+	.numBox{
+		text-align: center;
+		width: 50px;
+		border-radius: 20px;
+	}
+	.button{
+		font-size: 15px;
+		border-radius: 20px;
+		font-weight: bold;
+		background-color: white;
 	}
 	</style>
 </head>
@@ -171,7 +188,7 @@ int nextIdx = (pageGroup+1)*pageSize + 1;
 			      				<td>
 			      					<div><img src="/semipub/menu/photos/<%=dto.getImg()%>"></div>
 			      					<div><%=dto.getmName()%></div>
-			      					<div><input type="number" value="1" min="1" max="20" id="mCount<%=i%>"/></div>
+			      					<div><input type="number" value="1" class="numBox" min="1" max="20" id="mCount<%=i%>"/></div>
 			      					<div><%=dto.getPrice()%></div>
 			      					<%
 			      					if(dto.getState().equals("품절")){
@@ -183,7 +200,7 @@ int nextIdx = (pageGroup+1)*pageSize + 1;
 			      					}else{
 			      					%>
 			      					<div id="stateGreen">
-			      						<input type="button" value="담기" onclick="javascript:window.location.href='menuCart_ok.jsp?part=1&mIdx=<%=arr.get(i).getmIdx() %>&mCount='+document.getElementById('mCount<%=i%>').value">
+			      						<input type="button" class="button" value="담기" onclick="javascript:window.location.href='menuCart_ok.jsp?part=1&mIdx=<%=arr.get(i).getmIdx() %>&mCount='+document.getElementById('mCount<%=i%>').value">
 			      					</div>
 			      					<%
 			      					}

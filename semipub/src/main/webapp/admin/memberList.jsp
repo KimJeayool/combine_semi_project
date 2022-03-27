@@ -17,22 +17,28 @@
 	<link rel="stylesheet" type="text/css" href="/semipub/css/mainLayout.css">
 	<style> 
 	h2{
-	 text-align:center;
-	 font-size: 40px;
-	 padding-top: 30px;
+		 text-align:center;
+		 font-size: 40px;
+		 padding-top: 30px;
 	}
 	table{
 		width:650px;
 		margin:40px auto;
+		border-collapse: collapse;
 	}
 	table th{
-		background-color:gray;
+		background-color:black;
+		color: white;
+		font-size: 20px;
 	}
 	table td{
 		text-align: center;
+		font-size: 18px;
+		border-top: 1px solid black;
 	}
 	table a:link {
-		color: blue;
+		color: black;
+		text-decoration: underline;
 	}
 	table a:visited{
 		color: blue;
@@ -51,7 +57,8 @@
 		margin: 20px;
 		font-size: 25px;
 		font-weight: bold;
-		background-color: skyblue;
+		background-color: white;
+		border-radius: 20px;
 	}
 	#button:hover{
 		background-color: red;

@@ -8,7 +8,7 @@
 <!-- Access for manager -->
 <%@include file="/onlyManager.jsp"%>
 
-<jsp:useBean id="mdao" class="com.menu.MenuDAO" scope="session"></jsp:useBean>     
+<jsp:useBean id="medao" class="com.menu.MenuDAO" scope="session"></jsp:useBean>     
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -39,25 +39,30 @@
 		padding-top: 200px;
 	}
 	.tableArea{
-		height: 510px;
+		height: 550px;
 		padding-top: 10px;
 	}
 	table{
 		margin: 0px auto;
 		border-spacing: 20px;
+		width: 750px;
 	}
 	table td{
-		background-color: white;
+		background-color: black;
 		border-radius:10%;
 		text-align: center;
+		width: 160px;
+		color: white;
 	}
 	table img {
-		width: 120px;
+		width: 220px;
+		height: 150px;
 		border-top-left-radius: 20px;
 		border-top-right-radius: 20px;
 	}
 	#editBt{
 		background-color:white;
+		font-weight: bold;
 	}
 	#editBt:hover{
 		background-color: red;
@@ -105,7 +110,7 @@ int cateNum = Integer.parseInt(s_cateNum); // Menu Category Number
 %>
 <!----------------------------- Page Number ----------------------------- -->
 <%
-int totalCnt = mdao.getTotalMenuCount(cateNum); // Total Menu Count
+int totalCnt = medao.getTotalMenuCount(cateNum); // Total Menu Count
 int listSize = 8;
 int pageSize = 10;
 
@@ -148,7 +153,7 @@ int nextIdx = (pageGroup+1)*pageSize + 1; //다음 페이지 index
       <div class="centerSide" align="center">
 	      <%
 	      	//Get Menu List By cateNum
-	      	ArrayList<MenuDTO> arr=mdao.menuList(cateNum, cp, listSize);
+	      	ArrayList<MenuDTO> arr=medao.menuList(cateNum, cp, listSize);
 	      	if(arr==null||arr.size()==0){
 	      		%>
       			<div class="notFoundList">

@@ -27,9 +27,10 @@ int tNum=(int)(session.getAttribute("tNum"));
     input[type="button" i]{
       width: 200px;
       height: 50px;
-      font-size: 20px;
+      font-size: 30px;
       color: white;
       background-color: rgb(0, 156, 218);
+      border-radius: 20px;
     }
   </style>
   <script>
@@ -39,7 +40,7 @@ int tNum=(int)(session.getAttribute("tNum"));
   </script>
 </head>
 <body>
-  <h1>SEMI Pub</h1>
+  <h1>SEMI PUB</h1>
   <h2><%=tNum%>번 테이블에 오신걸 환영합니다.</h2>
   <div>
     <input type="button" value="방 입장" onclick="location.href='userEnter_ok.jsp'">
