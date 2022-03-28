@@ -9,7 +9,7 @@
 <%
 int tNum = Integer.parseInt(request.getParameter("tNum")); // Table Number
 int total = Integer.parseInt(request.getParameter("total")); // Total Price to pay
-int payed = pdao.getPayed(pdto.getPayIdx()); //
+int payed = pdao.getPayed(pdto.getgIdx()); //
 int price = pdto.getPrice();
 
 // total >= (payed + price)

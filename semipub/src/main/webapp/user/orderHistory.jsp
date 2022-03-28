@@ -23,6 +23,8 @@
 	}
 	h1{
 	font-size: 40px;
+	color: white;
+	text-shadow: 5px 4px 4px black;
 	}
 	/* Page Area*/
 	.tb{
@@ -130,6 +132,9 @@
 	.dutch{
 		font-size: 20px;
 		margin: 15px;
+	}
+	table tbody{
+	background-color: white;
 	}
 	</style>
 <%

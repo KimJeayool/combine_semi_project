@@ -27,6 +27,8 @@
 			text-align: center;
 			font-size: 40px;
 			padding-top: 30px;
+			color:white;
+			text-shadow: 5px 4px 4px black;
 		}
 		.tableArea{
 			height: 230px;
@@ -34,6 +36,7 @@
 		table{
 			margin: 30px auto;
 			width: 800px;
+			border-collapse: collapse;
 		}
 		table th{
 			background-color: black;
@@ -41,6 +44,8 @@
 		}
 		table td{
 			text-align: center;
+			background-color: white;
+			border-top: 1px solid black;
 		}
 		.pageNum{
 			text-align: center;
@@ -127,7 +132,7 @@ int nextIdx = (pageGroup+1)*pageSize + 1;
 				
 				<!-- Table Area -->
 				<div class="tableArea">
-					<table border="1">
+					<table >
 						<tr>
 							<th>No</th>
 							<th>메뉴이름</th>

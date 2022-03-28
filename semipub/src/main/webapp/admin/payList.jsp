@@ -32,13 +32,15 @@ h2{
 	font-size: 30px;
 	text-align: center;
 	padding-top: 30px;
+	color: white;
+	text-shadow: 5px 4px 4px black;
 }
 .tableArea{
 	text-align: center;
 }
 table{
 	margin: 25px auto;
-	width: 60%;
+	width: 40%;
 	height: 70%;
 	border: 1px;
 	border-collapse: collapse;
@@ -50,9 +52,11 @@ table th{
 }
 table td{
 	font-size: 18px;
+	
 }
 table tbody td{
 	border-bottom: 1px solid black;
+	background-color: white;
 }
 .amount{
 	width: 60%
@@ -69,8 +73,11 @@ table tbody td{
 </head>
 <%
 int gIdx = Integer.parseInt(request.getParameter("gIdx")); //Get Guest Index
+int payIdx = Integer.parseInt(request.getParameter("payIdx")); //Get Guest Index
 int total = 0;
+int price = 0;
 String name = "";
+String payment = "";
 java.sql.Timestamp payDate = new Timestamp(System.currentTimeMillis());
 %>
 <body>
@@ -92,13 +99,15 @@ java.sql.Timestamp payDate = new Timestamp(System.currentTimeMillis());
 							</tr>
 						</thead>
 						<%
-							ArrayList<SalesDTO> arr = sdao.arr(gIdx);
+							ArrayList<SalesDTO> arr = sdao.arr(gIdx, payIdx);
 							if (arr != null || arr.size() != 0) {
 						%>		
 						<%
 								for (int i = 0; i < arr.size(); i++) {
 									sdto = arr.get(i);
-									total += sdto.getPrice()*sdto.getCount();
+									total = sdto.getTotal();
+									price = sdto.getPrice();
+									payment = sdto.getPayment();
 									if(i == arr.size()-1){
 										name = sdto.getName();
 										payDate = sdto.getPayDate();
@@ -108,7 +117,7 @@ java.sql.Timestamp payDate = new Timestamp(System.currentTimeMillis());
 							<tr>
 								<td><%=sdto.getmName() %></td>
 								<td><%=sdto.getCount() %></td>
-								<td><%=sdto.getPrice() %></td>
+								<td><%=sdto.getTotal() %></td>
 							</tr>
 						</tbody>
 							<%
@@ -119,6 +128,12 @@ java.sql.Timestamp payDate = new Timestamp(System.currentTimeMillis());
 							<tr height="15"></tr>
 							<tr>
 								<td colspan="3" align="right">합계: <%=total %></td>
+							</tr>
+							<tr>
+								<td colspan="3" align="right">결제금액: <%=price %></td>
+							</tr>
+							<tr>
+								<td colspan="3" align="right">구분: <%=payment %></td>
 							</tr>
 							<tr>
 								<td colspan="3" align="right">담당자:<%=name %></td>

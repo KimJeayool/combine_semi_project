@@ -149,11 +149,11 @@ if(maxNum<=endIdx) endIdx = maxNum;
      		<!-- Button Block -->
       		<div class="buttonSide">
 	      		<div class="square" id="black"></div>
-	      		<div class="explanation">빈테이블</div>
+	      		<div class="explanation" style="color:white">빈테이블</div>
 	      		<div class="square" id="white"></div>
-	      		<div class="explanation">입장테이블</div>
+	      		<div class="explanation" style="color:white">입장테이블</div>
 	      		<div class="square" id="yellow"></div>
-	      		<div class="explanation" id="spaceRigth">결제요청</div>
+	      		<div class="explanation" id="spaceRigth" style="color:white">결제요청</div>
 	      		<input type="button" value="추가" class="button" onclick="return openAdd()">
 	      		<input type="button" value="삭제" class="button" onclick="return openDelete()">
       		</div>

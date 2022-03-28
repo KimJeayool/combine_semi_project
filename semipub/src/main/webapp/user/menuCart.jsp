@@ -26,6 +26,8 @@
 			text-align: center;
 			font-size: 40px;
 			padding-top: 20px;
+			color: white;
+			text-shadow: 5px 4px 4px black;
 		}
 		table{
 			width : 850px;
@@ -42,6 +44,11 @@
 		table td{
 			border-top: 3px double black;
 			font-size: 18px;
+		}
+		table tbody{
+			color: black;
+			background-color: white;
+
 		}
 		.numBox{
 			width: 40px;
@@ -92,7 +99,6 @@
 						<%
 						int total = 0; //Total Price
 						Cookie cks[] = request.getCookies();
-							
 						/* IF There is Not Cookie  */
 						if(cks==null || cks.length==1){
 							%>

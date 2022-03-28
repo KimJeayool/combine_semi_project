@@ -12,6 +12,7 @@ public class SalesDTO {
 	private Timestamp payDate;
 	private String name;
 	private String mName;
+	private String payment;
 	private int price;
 	private int count;
 	
@@ -22,23 +23,33 @@ public class SalesDTO {
 		super();
 	}
 
-	public SalesDTO(int payIdx, int tNum, int total, Timestamp payDate, String name, int gIdx) {
+	public SalesDTO(int payIdx, int tNum, int price, Timestamp payDate, String name, int gIdx) {
 		super();
 		this.payIdx = payIdx;
 		this.tNum = tNum;
-		this.total = total;
+		this.price = price;
 		this.payDate = payDate;
 		this.name = name;
 		this.gIdx = gIdx;
 	}
 	
-	public SalesDTO(String mName, int price, int count, Timestamp payDate, String name) {
+	public SalesDTO(String mName, int total, int price, int count, Timestamp payDate, String name, String payment) {
 		super();
 		this.mName = mName;
+		this.total = total;
 		this.price = price;
 		this.count = count;
 		this.payDate = payDate;
 		this.name = name;
+		this.payment = payment;
+	}
+
+	public String getPayment() {
+		return payment;
+	}
+
+	public void setPayment(String payment) {
+		this.payment = payment;
 	}
 
 	public String getmName() {

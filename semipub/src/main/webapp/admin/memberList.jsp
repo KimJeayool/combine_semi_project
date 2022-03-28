@@ -20,11 +20,14 @@
 		 text-align:center;
 		 font-size: 40px;
 		 padding-top: 30px;
+		 color: white;
+		 text-shadow: 5px 4px 4px black;
 	}
 	table{
 		width:650px;
 		margin:40px auto;
 		border-collapse: collapse;
+		
 	}
 	table th{
 		background-color:black;
@@ -35,6 +38,9 @@
 		text-align: center;
 		font-size: 18px;
 		border-top: 1px solid black;
+	}
+	table tbody{
+	background-color: white;
 	}
 	table a:link {
 		color: black;

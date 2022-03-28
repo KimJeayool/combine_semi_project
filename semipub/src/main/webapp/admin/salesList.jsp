@@ -27,6 +27,8 @@
 h1 {
 	font-size: 40px;
 	padding-top: 20px;
+	color: white;
+	text-shadow: 5px 4px 4px black;
 }
 
 #tb {
@@ -40,6 +42,7 @@ h1 {
 	margin: 0px auto;
 	border: 1px solid black;
 	border-collapse: collapse;
+	background-color: white;
 }
 
 table {
@@ -206,10 +209,10 @@ if (cp % pageSize == 0)
 							<tr>
 								<td><%=sdto.getPayIdx()%></td>
 								<td><%=sdto.gettNum()%></td>
-								<td><%=sdto.getTotal()%> 원</td>
+								<td><%=sdto.getPrice()%> 원</td>
 								<td><%=sdto.getPayDate().toString()%></td>
 								<td><%=sdto.getName()%></td>
-								<td><a href="payList.jsp?gIdx=<%=sdto.getgIdx()%>">결제내역</a></td>
+								<td><a href="payList.jsp?gIdx=<%=sdto.getgIdx()%>&payIdx=<%=sdto.getPayIdx()%>">결제내역</a></td>
 							</tr>
 							<%
 							}

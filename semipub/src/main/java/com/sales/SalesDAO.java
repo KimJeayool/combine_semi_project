@@ -32,7 +32,7 @@ public class SalesDAO {
 					+ "("
 					+ "SELECT ROWNUM AS rnum, A.* "
 					+ "FROM ("
-					+ "SELECT A.payidx, B.tnum, B.total, A.paydate, C.name, B.gidx FROM PAYLIST A, GUEST B , ADMIN C "
+					+ "SELECT A.payidx, B.tnum, A.price, A.paydate, C.name, B.gidx FROM PAYLIST A, GUEST B , ADMIN C "
 					+ "WHERE A.gidx = B.gidx AND b.pay='결제' "
 					+ "AND A.aIdx = C.aIdx "
 					+ "AND TO_CHAR(A.paydate, 'YYYY-MM-DD') >= ? "
@@ -51,11 +51,11 @@ public class SalesDAO {
 			while(rs.next()) {
 				int payIdx=rs.getInt("payidx"); 
 				int tNum=rs.getInt("tnum");
-				int total=rs.getInt("total");
+				int price=rs.getInt("price");
 				java.sql.Timestamp payDate=rs.getTimestamp("paydate");
 				String name=rs.getString("name");
 				int gIdx=rs.getInt("gIdx"); 
-				SalesDTO dto=new SalesDTO(payIdx, tNum, total, payDate, name, gIdx);
+				SalesDTO dto=new SalesDTO(payIdx, tNum, price, payDate, name, gIdx);
 				arr.add(dto);				
 			}
 			return arr;
@@ -121,7 +121,7 @@ public class SalesDAO {
 				enddate = "9999-99-99";
 			}
 			
-			String sql="select sum(B.total) from PAYLIST A, GUEST B , ADMIN C "
+			String sql="select sum(A.price) from PAYLIST A, GUEST B , ADMIN C "
 					+ "WHERE A.gidx = B.gidx AND B.pay='결제' "
 					+ "AND A.aIdx = C.aIdx "
 					+ "AND TO_CHAR(paydate, 'YYYY-MM-DD') >= ? "
@@ -147,25 +147,30 @@ public class SalesDAO {
 	}
 	
 	//Get PAYLIST 
-	public ArrayList<SalesDTO> arr(int gIdx){
+	public ArrayList<SalesDTO> arr(int gIdx, int payIdx){
 		try {
 			conn=com.db.SemiDB.getConn();
 
-			String sql="select A.mname, A.price, B.count, C.paydate, D.name from menu A, semi_order B, paylist C, admin D "
-					+ "where A.midx = B.midx and B.gidx = c.gidx and c.aidx = d.aidx and B.gidx = ?";
+			String sql="select A.mname, E.total, C.price, B.count, C.paydate, D.name, F.payment "
+					+ "from menu A, semi_order B, paylist C, admin D, guest E, payment F "
+					+ "where A.midx = B.midx and B.gidx = c.gidx and c.aidx = d.aidx and c.gidx = e.gidx and C.paytype = F.paytype "
+					+ "and B.gidx = ? and C.payidx = ?";
 			
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, gIdx);
+			ps.setInt(2, payIdx);
 			rs=ps.executeQuery();
 			
 			ArrayList<SalesDTO> arr=new ArrayList<SalesDTO>();
 			while(rs.next()) {
 				String mName=rs.getString("mname"); 
+				int total=rs.getInt("total");
 				int price=rs.getInt("price");
 				int count=rs.getInt("count");
 				java.sql.Timestamp payDate=rs.getTimestamp("paydate");
 				String name=rs.getString("name");
-				SalesDTO dto=new SalesDTO(mName, price, count, payDate, name);
+				String payment=rs.getString("payment");
+				SalesDTO dto=new SalesDTO(mName, total, price, count, payDate, name, payment);
 				
 				arr.add(dto);				
 			}
