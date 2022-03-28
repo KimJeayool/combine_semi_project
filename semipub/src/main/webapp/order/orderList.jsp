@@ -19,6 +19,8 @@
 	h2{	
 		font-size: 40px;
 		text-align: center;
+		color: white;
+		text-shadow: 5px 4px 4px black;
 	}
 	table{
 		width: 50vw;
@@ -50,6 +52,9 @@
 	input[type=checkbox] {
 		width : 25px;
 		height : 25px;
+	}
+	table tbody{
+	background-color: white;
 	}
 	#orderWhite{
 		background-color: yellow;
@@ -108,7 +113,7 @@
 			<table>
 				<thead>
 					<tr>
-						<td colspan="7" align="right">
+						<td colspan="7" align="right" style="color:white">
 							잔여 주문 : <strong><%=odao.countOrders(1) %>개</strong>
 						</td>
 					</tr>

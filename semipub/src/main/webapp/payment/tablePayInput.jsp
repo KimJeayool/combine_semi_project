@@ -26,6 +26,8 @@
 			text-align: center;
 			font-size: 40px;
 			padding-top: 30px;
+			color:white;
+			text-shadow: 5px 4px 4px black;
 		}
 		.totalPay{
 			text-align: center;
@@ -57,6 +59,7 @@
 		}
 		table td{
 			text-align: center;
+			background-color: white;
 		}
 		#cancelMsg{
 			font-weight: bold;
