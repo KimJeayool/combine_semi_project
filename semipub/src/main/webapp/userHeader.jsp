@@ -25,7 +25,7 @@
     <nav>
       <ul>
         <a href="/semipub/user/menuList.jsp"><li id="menu_tag1">메뉴</li></a>
-        <a href="#"><li id="menu_tag2"></li></a> <!-- Matching Table -->
+        <a href="/semipub/user/matchTableList.jsp"><li id="menu_tag2">매칭테이블</li></a> <!-- Matching Table -->
         <a href="/semipub/game/gameList.jsp"><li id="menu_tag3">게임</li></a>
         <a href="/semipub/user/menuCart.jsp"><li id="menu_tag4">장바구니<%=cartCnt-1>0?"("+(cartCnt-1)+")":"" %></li></a>
         <a href="/semipub/user/orderHistory.jsp"><li id="menu_tag5">주문내역</li></a>

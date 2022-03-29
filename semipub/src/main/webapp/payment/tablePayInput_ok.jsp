@@ -9,23 +9,15 @@
 <%
 int tNum = Integer.parseInt(request.getParameter("tNum")); // Table Number
 int total = Integer.parseInt(request.getParameter("total")); // Total Price to pay
-int payed = pdao.getPayed(pdto.getPayIdx()); //
+int payed = pdao.getPayed(pdto.getgIdx()); //
 int price = pdto.getPrice();
 
-// total >= (payed + price)
 int result = 0;
 
-//if(total==payed+price){
-//	result += gdao.changeGuestState(pdto.getgIdx());
-//}else if(total>payed+price){
-//	result = pdao.inputPay(pdto);
-//}
-System.out.println(pdto.getaIdx());//test
-
 if(total>=payed+price){ //27000 >=10000+17000
-	result = pdao.inputPay(pdto); // Pay 1
+	result = pdao.inputPay(pdto); // Pay + 1
 	if(total==payed+price){
-		result += gdao.changeGuestState(pdto.getgIdx()); // 미결제 -> 결제 1
+		result += gdao.changeGuestState(pdto.getgIdx()); // 미결제 -> 결제 + 1
 		
 	}
 }
